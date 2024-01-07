@@ -63,6 +63,20 @@ class EventController {
         }
     }
 
+    async findMainEvents(
+        request: Request, 
+        response: Response, 
+        next: NextFunction
+        ) {
+
+        try {
+            const events = await this.eventUseCase.findEventsMain()
+            return response.status(200).json(events)
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async findEventsByName(
         request: Request, 
         response: Response, 

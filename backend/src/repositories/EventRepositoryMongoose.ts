@@ -66,6 +66,15 @@ class EventRepositoryMongoose implements EventRepository {
         return findEvent.map((event) => event.toObject());
     }
 
+    
+    async findEventsMain(date: Date): Promise<Event[]> {
+        const endDate = new Date(date);
+        endDate.setMonth(endDate.getMonth() + 1);
+        const findEvent = await EventModel.find({ date: {$gte: date, $lt: endDate} }).limit(4).exec();
+
+        return findEvent.map((event) => event.toObject());
+    }
+
     async update(event: Event, id: string): Promise<any> {
         const eventUpdate = await EventModel.updateMany({ _id: id }, event);
 

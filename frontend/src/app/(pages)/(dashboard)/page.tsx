@@ -2,7 +2,11 @@ import { BannerPrimary } from "@/app/components/BannerPrimary";
 import { BannerSecondary } from "@/app/components/BannerSecondary";
 import { categories } from "@/app/utils/categories";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+    const response = await fetch ('http://localhost:3000/events/main', {
+        method: 'GET',
+    });
+    console.log('TRAZENDO...', response);
     return (
         //Banner principal
         <div className="container mx-auto">

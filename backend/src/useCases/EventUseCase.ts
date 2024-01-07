@@ -74,6 +74,12 @@ class EventUseCase {
         return events;
     }
 
+    async findEventsMain() {
+        const events = await this.eventRepository.findEventsMain(new Date())
+
+        return events;
+    }
+
     async findEventsByName(name: string) {
         if(!name) throw new HttpException(400, 'Name is required')
         const events = await this.eventRepository.findEventsByName(name)
